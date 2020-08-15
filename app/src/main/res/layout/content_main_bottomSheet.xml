@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="match_parent"
+	android:layout_width="match_parent"
+	android:orientation="vertical">
+
+	<RelativeLayout
+		android:layout_height="40dp"
+		android:layout_width="match_parent"
+		android:layout_alignParentBottom="true"
+		android:padding="8dp">
+
+		<TextView
+			android:layout_height="match_parent"
+			android:textAppearance="?android:attr/textAppearanceSmall"
+			android:layout_width="wrap_content"
+			android:text="File_Name.java"
+			android:textColor="#FFFFFFFF"
+			android:gravity="center_vertical"/>
+
+		<LinearLayout
+			android:id="@+id/options"
+			android:layout_height="match_parent"
+			android:layout_width="wrap_content"
+			android:orientation="horizontal"
+			android:layout_alignParentEnd="true">
+
+			<ImageButton
+				android:layout_height="match_parent"
+				android:layout_width="25dp"
+                android:padding="2dp"
+				android:background="?attr/selectableItemBackground"
+				android:src="@drawable/image_1"
+				android:scaleType="fitCenter"
+				android:id="@+id/expandir"/>
+
+		</LinearLayout>
+
+	</RelativeLayout>
+
+	<LinearLayout
+		android:layout_height="match_parent"
+		android:layout_width="match_parent"
+		android:id="@+id/bottomSheetContent"
+		android:background="#FFFFFFFF">
+
+		<include
+			layout="@layout/teste"/>
+
+	</LinearLayout>
+
+</LinearLayout>
+
