@@ -27,13 +27,12 @@ public class MainActivity extends BaseActivity
     private BottomSheetBehavior bottomSheetBehavior;
     private View bottomSheetLayout;
     private ViewGroup.LayoutParams layoutParams;
-
-    private Boolean bottomSheetExpanded;
+    
+    private int oldState;
 
     //teste
     float pos;
     String state;
-    int oldState;
     
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -56,7 +55,7 @@ public class MainActivity extends BaseActivity
                 @Override
                 public void run()
                 {
-                    bottomSheetFull(true);
+                    updateBottomSheetHeight(0);
                 }
             });
         
@@ -78,7 +77,6 @@ public class MainActivity extends BaseActivity
                     
                     text.setText(MainActivity.this.pos + " | " + MainActivity.this.state);
                     
-                   // Toast.makeText(MainActivity.this, "estado: " + estados[state-1], 1).show();
                     switch(state)
                     {
                         case BottomSheetBehavior.STATE_HALF_EXPANDED:
@@ -122,10 +120,9 @@ public class MainActivity extends BaseActivity
         expandir.setOnClickListener(new View.OnClickListener(){
 
                 @Override
-                public void onClick(View View)
+                public void onClick(View view)
                 {
-                    //bottomSheetFull(!bottomSheetExpanded);
-                    Toast.makeText(MainActivity.this, "Turn to "+bottomSheetExpanded, 1).show();
+                    //implementar
                 }
             });
  
@@ -135,37 +132,8 @@ public class MainActivity extends BaseActivity
     protected void onResume()
     {
         super.onResume();
-        //Toast.makeText(this, "onResume", 1).show();
     }
 
-
-    private void bottomSheetFull(boolean full)
-    {
-        //nao setar os mesmos parametros
-        if(bottomSheetExpanded!=null)
-            if(full==bottomSheetExpanded)
-                return;
-        
-        int toHeight;
-        int displayHeight = getDisplayHeight();
-
-        ViewGroup.LayoutParams layoutParams = bottomSheetLayout.getLayoutParams();
-
-        if(full)
-        {
-            bottomSheetExpanded = true;
-            toHeight = displayHeight;
-        }
-        else
-        {
-            bottomSheetExpanded = false;
-            toHeight = (displayHeight / 2);
-        }
-
-        layoutParams.height = toHeight;
-
-        bottomSheetLayout.setLayoutParams(layoutParams);
-    }
     
     private void updateBottomSheetHeight(float pos)
     {
