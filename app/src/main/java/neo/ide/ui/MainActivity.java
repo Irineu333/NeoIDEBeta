@@ -80,10 +80,13 @@ public class MainActivity extends BaseActivity
                     switch(state)
                     {
                         case BottomSheetBehavior.STATE_HALF_EXPANDED:
-                            bottomSheetFull(false);
+                            updateBottomSheetHeight(0.5f);
                             break;
                         case BottomSheetBehavior.STATE_EXPANDED:
-                            bottomSheetFull(true);
+                            updateBottomSheetHeight(1);
+                            break;
+                        case BottomSheetBehavior.STATE_COLLAPSED:
+                            updateBottomSheetHeight(0);
                             break;
                         case BottomSheetBehavior.STATE_HIDDEN:
                             //abrir novamente
