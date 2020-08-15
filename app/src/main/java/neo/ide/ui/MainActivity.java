@@ -26,6 +26,7 @@ public class MainActivity extends BaseActivity
 {
     private BottomSheetBehavior bottomSheetBehavior;
     private View bottomSheetLayout;
+    private ViewGroup.LayoutParams layoutParams;
 
     private Boolean bottomSheetExpanded;
 
@@ -110,10 +111,7 @@ public class MainActivity extends BaseActivity
                             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HALF_EXPANDED);
                    
                     //redimensionar
-                    if(pos>0.5)
-                        bottomSheetFull(true);
-                        else
-                            bottomSheetFull(false);
+                    updateBottomSheetHeight(pos);
                 }
                 
                 
@@ -166,6 +164,25 @@ public class MainActivity extends BaseActivity
 
         layoutParams.height = toHeight;
 
+        bottomSheetLayout.setLayoutParams(layoutParams);
+    }
+    
+    private void updateBottomSheetHeight(float pos)
+    {
+        int toHeight;
+        float toPos;
+        
+        if(layoutParams==null)
+        layoutParams = bottomSheetLayout.getLayoutParams();
+        
+        if(pos<=0.5)
+            toPos = 0.5f;
+           else
+             toPos = pos;
+             
+        toHeight = (int) (getDisplayHeight()*toPos);
+        
+        layoutParams.height = toHeight;
         bottomSheetLayout.setLayoutParams(layoutParams);
     }
 }
