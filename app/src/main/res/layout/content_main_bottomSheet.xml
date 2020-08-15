@@ -29,9 +29,8 @@
 			<ImageButton
 				android:layout_height="match_parent"
 				android:layout_width="25dp"
-                android:padding="2dp"
+				android:padding="2dp"
 				android:background="?attr/selectableItemBackground"
-				android:src="@drawable/image_1"
 				android:scaleType="fitCenter"
 				android:id="@+id/expandir"/>
 

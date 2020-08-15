@@ -21,18 +21,22 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import android.view.ViewGroup.LayoutParams;
 
 public class MainActivity extends BaseActivity
 {
     private BottomSheetBehavior bottomSheetBehavior;
     private View bottomSheetLayout;
-    private ViewGroup.LayoutParams layoutParams;
+    private ViewGroup.LayoutParams bottomSheetLayoutParams;
     
     private int oldState;
 
     //teste
     float pos;
     String state;
+
+    private ViewGroup.LayoutParams codeEditorLayoutParams;
+    private View codeEditorLayout;
     
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,6 +45,7 @@ public class MainActivity extends BaseActivity
         setContentView(R.layout.activity_main);
 
         bottomSheetLayout = findViewById(R.id.bottomSheet);
+        codeEditorLayout = findViewById(R.id.codeEditor);
         
         //configurar
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetLayout);
@@ -55,7 +60,8 @@ public class MainActivity extends BaseActivity
                 @Override
                 public void run()
                 {
-                    updateBottomSheetHeight(0);
+                    bottomSheetHeightUpdate(0);
+                    layoutUpdate(0);
                 }
             });
         
@@ -80,13 +86,13 @@ public class MainActivity extends BaseActivity
                     switch(state)
                     {
                         case BottomSheetBehavior.STATE_HALF_EXPANDED:
-                            updateBottomSheetHeight(0.5f);
+                            bottomSheetHeightUpdate(0.5f);
                             break;
                         case BottomSheetBehavior.STATE_EXPANDED:
-                            updateBottomSheetHeight(1);
+                            bottomSheetHeightUpdate(1);
                             break;
                         case BottomSheetBehavior.STATE_COLLAPSED:
-                            updateBottomSheetHeight(0);
+                            bottomSheetHeightUpdate(0);
                             break;
                         case BottomSheetBehavior.STATE_HIDDEN:
                             //abrir novamente
@@ -112,7 +118,8 @@ public class MainActivity extends BaseActivity
                             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HALF_EXPANDED);
                    
                     //redimensionar
-                    updateBottomSheetHeight(pos);
+                    bottomSheetHeightUpdate(pos);
+                    layoutUpdate(pos);
                 }
                 
                 
@@ -138,22 +145,39 @@ public class MainActivity extends BaseActivity
     }
 
     
-    private void updateBottomSheetHeight(float pos)
+    private void bottomSheetHeightUpdate(float pos)
     {
         int toHeight;
         float toPos;
         
-        if(layoutParams==null)
-        layoutParams = bottomSheetLayout.getLayoutParams();
+        if(bottomSheetLayoutParams==null)
+        bottomSheetLayoutParams = bottomSheetLayout.getLayoutParams();
         
-        if(pos<=0.5)
+        if(pos<=0.5f)
             toPos = 0.5f;
            else
              toPos = pos;
              
         toHeight = (int) (getDisplayHeight()*toPos);
         
-        layoutParams.height = toHeight;
-        bottomSheetLayout.setLayoutParams(layoutParams);
+        bottomSheetLayoutParams.height = toHeight;
+        bottomSheetLayout.setLayoutParams(bottomSheetLayoutParams);
+    }
+    
+    private void layoutUpdate(float pos)
+    {
+        float toPos;
+        int toHeight;
+       if(codeEditorLayoutParams==null)
+            codeEditorLayoutParams = codeEditorLayout.getLayoutParams();
+            
+       if(pos>=0.5f)
+           toPos = 0.5f;
+           else
+               toPos = 1-pos;
+       toHeight = (int) (getDisplayHeight()*toPos);
+       
+       codeEditorLayoutParams.height = toHeight - bottomSheetBehavior.getPeekHeight();;
+       codeEditorLayout.setLayoutParams(codeEditorLayoutParams);
     }
 }
