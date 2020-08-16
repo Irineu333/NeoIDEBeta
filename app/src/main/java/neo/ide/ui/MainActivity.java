@@ -129,7 +129,7 @@ public class MainActivity extends BaseActivity
             });
 
         //ImageButton expandir = findViewById(R.id.expandir);
-
+        /*
         expandir.setOnClickListener(new View.OnClickListener(){
 
                 @Override
@@ -138,7 +138,7 @@ public class MainActivity extends BaseActivity
                     //implementar
                 }
             });
-
+            */
     }
 
     @Override
