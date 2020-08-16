@@ -9,6 +9,8 @@ import android.os.PersistableBundle;
 import android.os.Bundle;
 import android.view.ViewGroup;
 import android.util.DisplayMetrics;
+import android.view.View;
+import android.widget.Toast;
 
 public class BaseActivity extends AppCompatActivity
 {
@@ -20,6 +22,15 @@ public class BaseActivity extends AppCompatActivity
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, _input, getResources().getDisplayMetrics());
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        contextoAtual = this;
+        
+    }
+    
+    
     @Override
     protected void onResume()
     {
